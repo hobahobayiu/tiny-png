@@ -6,7 +6,8 @@ const crypto = require("crypto");
 tinify.key = "jicplUDyuUtAYPrUSI2S9EwperDuvN7h";
 const ignorePath = ["node_modules", "tiny-png"];
 const configPath = "config.json";
-let config = {};
+let configOld = {};
+let configNew = {};
 tinify.validate(function (err) {
     if (err) {
         console.error(err);
@@ -28,8 +29,8 @@ tinify.validate(function (err) {
             const sizeNew = fs.statSync(texture).size;
             const data = fs.readFileSync(texture);
             const md5 = crypto.createHash("md5").update(data, "utf-8").digest("hex");
-            config[md5] = 1;
-            fs.writeFileSync(configPath, JSON.stringify(config));
+            configNew[md5] = 1;
+            fs.writeFileSync(configPath, JSON.stringify(configNew, undefined, 4));
             console.log(`${++index}/${length} ${texture} ${formatBytes(sizeOld)} -> ${formatBytes(sizeNew)} ${((sizeOld - sizeNew) / sizeOld).toFixed(2)}`)
         });
     })
@@ -43,6 +44,7 @@ function walkTexture(dir) {
             const data = fs.readFileSync(filePath);
             const md5 = crypto.createHash("md5").update(data, "utf-8").digest("hex");
             if (config[md5]) {
+                configNew[md5] = 1;
                 return;
             }
             list.push(filePath);
