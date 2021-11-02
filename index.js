@@ -26,12 +26,11 @@ tinify.validate(function (err) {
     console.log(length);
     textures.forEach((texture) => {
         const sizeOld = fs.statSync(texture).size;
-        const value = ++num;
         tinify.fromFile(texture).toFile(texture).then(() => {
             const sizeNew = fs.statSync(texture).size;
             const data = fs.readFileSync(texture);
             const md5 = crypto.createHash("md5").update(data, "utf-8").digest("hex");
-            configNew[md5] = value;
+            configNew[md5] = ++num;
             fs.writeFileSync(configPath, JSON.stringify(configNew, undefined, 4));
             console.log(`${++index}/${length} ${texture} ${formatBytes(sizeOld)} -> ${formatBytes(sizeNew)} ${((sizeOld - sizeNew) / sizeOld).toFixed(2)}`)
         });
