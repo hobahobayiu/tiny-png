@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path")
 const crypto = require("crypto");
 
-tinify.key = "jicplUDyuUtAYPrUSI2S9EwperDuvN7h";
+tinify.key = "jKP1WPhxyxNxXyxcVZ1Fw62JcjjWfB7q";//"jicplUDyuUtAYPrUSI2S9EwperDuvN7h";
 const ignorePath = ["node_modules", "tiny-png"];
 const configPath = "config.json";
 let configOld = {};
@@ -20,7 +20,7 @@ tinify.validate(function (err) {
     } else {
         configOld = JSON.parse(fs.readFileSync(configPath))
     }
-    const textures = walkTexture("../");
+    const textures = walkTexture("../assets/");
     const length = textures.length;
     let index = 0;
     console.log(length);
