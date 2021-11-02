@@ -8,16 +8,17 @@ const ignorePath = ["node_modules", "tiny-png"];
 const configPath = "config.json";
 let configOld = {};
 let configNew = {};
+let num = 0;
 tinify.validate(function (err) {
     if (err) {
         console.error(err);
         return;
     }
     if (!fs.existsSync(configPath)) {
-        config = {};
+        configOld = {};
         fs.mk
     } else {
-        config = JSON.parse(fs.readFileSync(configPath))
+        configOld = JSON.parse(fs.readFileSync(configPath))
     }
     const textures = walkTexture("../");
     const length = textures.length;
@@ -29,7 +30,7 @@ tinify.validate(function (err) {
             const sizeNew = fs.statSync(texture).size;
             const data = fs.readFileSync(texture);
             const md5 = crypto.createHash("md5").update(data, "utf-8").digest("hex");
-            configNew[md5] = 1;
+            configNew[md5] = ++num;
             fs.writeFileSync(configPath, JSON.stringify(configNew, undefined, 4));
             console.log(`${++index}/${length} ${texture} ${formatBytes(sizeOld)} -> ${formatBytes(sizeNew)} ${((sizeOld - sizeNew) / sizeOld).toFixed(2)}`)
         });
@@ -43,8 +44,8 @@ function walkTexture(dir) {
         if ([".png", ".jgp"].indexOf(path.extname(name)) != -1) {
             const data = fs.readFileSync(filePath);
             const md5 = crypto.createHash("md5").update(data, "utf-8").digest("hex");
-            if (config[md5]) {
-                configNew[md5] = 1;
+            if (configOld[md5]) {
+                configNew[md5] = ++num;
                 return;
             }
             list.push(filePath);
