@@ -1,0 +1,24 @@
+{
+  "name": "tinypng",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "tinify": "^1.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hobahobayiu/tiny-png.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hobahobayiu/tiny-png/issues"
+  },
+  "homepage": "https://github.com/hobahobayiu/tiny-png#readme"
+}
