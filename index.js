@@ -3,8 +3,8 @@ const fs = require("fs");
 const path = require("path")
 const crypto = require("crypto");
 
-tinify.key = "jKP1WPhxyxNxXyxcVZ1Fw62JcjjWfB7q";//"jicplUDyuUtAYPrUSI2S9EwperDuvN7h";
-const ignorePath = ["node_modules", "tiny-png"];
+tinify.key = "NlH3hdTDTQbV5trxbfVn8cH8dgtKvcbr"; //"jKP1WPhxyxNxXyxcVZ1Fw62JcjjWfB7q";//"jicplUDyuUtAYPrUSI2S9EwperDuvN7h";
+const ignorePath = ["node_modules", "tiny-png", "build", "library", "local", "packages", "temp", "settings"];
 const configPath = "config.json";
 let configOld = {};
 let configNew = {};
