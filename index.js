@@ -22,7 +22,7 @@ tinify.validate(function (err) {
     } else {
         configOld = JSON.parse(fs.readFileSync(configPath))
     }
-    const textures = walkTexture("../assets/");
+    const textures = walkTexture("../");
     const length = textures.length;
     let index = 0;
     console.log(length);
